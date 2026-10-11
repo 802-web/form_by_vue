@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import CustomInput from './components/CustomInput.vue'
 
 const userInput = ref('')
 const msg = ref('')
@@ -7,9 +8,16 @@ const checked = ref('bad')
 const fruits = ref([])
 const gender = ref()
 const selected = ref([])
+const customUserInput = ref('hello')
+const titleInput = ref('titleInput')
 </script>
 
 <template>
+	<h1>CustomInput</h1>
+	<button @click="customUserInput = 'hello'">hello</button>
+	<p>userCustomInput:{{ customUserInput }}</p>
+	<CustomInput v-model.upperCase="customUserInput" v-model:title-name="titleInput" />
+
 	<h1>v-model</h1>
 	<h2>text</h2>
 	<input v-model.lazy.number="userInput" type="text" />
