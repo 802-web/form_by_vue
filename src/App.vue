@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import CustomInput from './components/CustomInput.vue'
-import { refHistory } from './composables/refHistory.js'
+// import { limit } from './composables/refHistory.js'
+import { useLimitHistory } from './composables/LimitRefHistory.js'
 
 const userInput = ref('')
 const msg = ref('')
@@ -15,7 +16,7 @@ const titleInput = ref('titleInput')
 const count = ref(0)
 const userInput2 = ref('')
 
-const { history: history2, undo: undo2 } = refHistory(userInput2)
+const { history: history2, undo: undo2 } = useLimitHistory(userInput2, ref(3))
 </script>
 <template>
 	<h1>Composalable</h1>
