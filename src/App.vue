@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import CustomInput from './components/CustomInput.vue'
+import { refHistory } from './composables/refHistory.js'
 
 const userInput = ref('')
 const msg = ref('')
@@ -10,9 +11,24 @@ const gender = ref()
 const selected = ref([])
 const customUserInput = ref('hello')
 const titleInput = ref('titleInput')
-</script>
 
+const count = ref(0)
+const userInput2 = ref('')
+
+const { history: history2, undo: undo2 } = refHistory(userInput2)
+</script>
 <template>
+	<h1>Composalable</h1>
+	<p>count: {{ count }}</p>
+	<button @click="count++">+1</button>
+	<p>history: {{ history }}</p>
+	<p><button @click="undo">pop</button></p>
+
+	<p>count: {{ userInput2 }}</p>
+	<input v-model="userInput2" type="text" />
+	<p>history: {{ history2 }}</p>
+	<p><button @click="undo2">pop</button></p>
+
 	<h1>CustomInput</h1>
 	<button @click="customUserInput = 'hello'">hello</button>
 	<p>userCustomInput:{{ customUserInput }}</p>
