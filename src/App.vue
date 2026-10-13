@@ -17,9 +17,11 @@ const count = ref(0)
 const userInput2 = ref('')
 
 const { history: history2, undo: undo2 } = useLimitHistory(userInput2, ref(3))
+const isShow = ref(true)
 </script>
 <template>
-	<h1>Composalable</h1>
+	<button @click="isShow = !isShow">show</button>
+	<h1 :class="{ 'opa-80': isShow, 'opa-20': !isShow }">Composalable</h1>
 	<p>count: {{ count }}</p>
 	<button @click="count++">+1</button>
 	<p>history: {{ history }}</p>
@@ -30,12 +32,12 @@ const { history: history2, undo: undo2 } = useLimitHistory(userInput2, ref(3))
 	<p>history: {{ history2 }}</p>
 	<p><button @click="undo2">pop</button></p>
 
-	<h1>CustomInput</h1>
+	<h1 :class="{ 'opa-80': isShow, 'opa-20': !isShow }">CustomInput</h1>
 	<button @click="customUserInput = 'hello'">hello</button>
 	<p>userCustomInput:{{ customUserInput }}</p>
 	<CustomInput v-model.upperCase="customUserInput" v-model:title-name="titleInput" />
 
-	<h1>v-model</h1>
+	<h1 :class="{ 'opa-80': isShow, 'opa-20': !isShow }">v-model</h1>
 	<h2>text</h2>
 	<input v-model.lazy.number="userInput" type="text" />
 	<p>{{ typeof userInput }}</p>
@@ -71,4 +73,14 @@ const { history: history2, undo: undo2 } = useLimitHistory(userInput2, ref(3))
 	<p>{{ selected }}</p>
 </template>
 
-<style scoped></style>
+<style scoped>
+h1 {
+	transition: opacity 2s;
+}
+.opa-80 {
+	opacity: 0.8;
+}
+.opa-20 {
+	opacity: 0.2;
+}
+</style>
